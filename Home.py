@@ -1,24 +1,33 @@
-# > Imports
+#Unix Properties
+import sys
+from colorama import init
+init(strip=not sys.stdout.isatty())
+from termcolor import cprint
+from pyfiglet import figlet_format
+cprint(figlet_format("Unix", font="doh"), "blue") #Usando una funcion de colorama llamada cprint para imprimir un texto ascii en color usando la funciones de pyfiglet
 import os
+import errno
 
-# > Inputs
-titulo = input("¿Que Titulo quieres asignarle a tu registro?: ")
-descripcion = input("Describeme, ¿Que has hecho el dia de hoy?: ")
+# > inputs
+titulo = input("¿Que titulo deseas usar?: ")            #Solicitando un titulo de archivo
+descripcion = input("¿Que deseas comentar?: ")          #Solicitando una descripcion del archivo
+namedir = input("Ingrese el nombre de la ruta: ")       #Solicitando una ruta donde quiere almacenar el archivo
 
-# > Variables
-enter = ""
-
-# > File Generator
-Unix = open(f"{titulo}.txt","w")
-
-# > Funciones
-if titulo == enter:
-	print("Debes agregar un titulo, de lo contrario el programa no funcionara como debe!")
-elif titulo != enter:
-	Unix.write(descripcion)
-	
-	
-if descripcion == enter:
-	print("Debes resumir que has hecho el dia de hoy, de lo contrario, el programa no funcionara como debe!")
-elif descripcion != enter:
-	Unix.close()
+# > Condiciones
+if titulo == "":
+    print("Debes asignarle un titulo a tu archivo")
+elif titulo == " ":
+    print("Debes asignarle un titulo a tu archivo")
+elif descripcion == "":
+    print("Debes asignar una descricion")
+elif descripcion == " ":
+    print("Debes asignar una descricion")
+elif namedir == "":
+    print("Debes asignarle un nombre al directorio")
+elif namedir == " ":
+    print("Debes asignarle un nombre al directorio")
+else:
+    os.mkdir(namedir)
+    Unix = open(f"c:{namedir}\{titulo}.txt", "w")
+    Unix.write(descripcion)
+    Unix.close()
